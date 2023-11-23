@@ -34,6 +34,12 @@ export default function NavBar({ session }: { session: Session | null }) {
             ></Image>
             <p>co:valance</p>
           </Link>
+
+          <div>
+            <button onClick={toggleDarkMode} className="p-2">
+              {colorTheme === 'dark' ? <Sun /> : <Moon />}
+            </button>
+          </div>
           <div>
             {session ? (
               <UserDropdown session={session} />
@@ -49,11 +55,6 @@ export default function NavBar({ session }: { session: Session | null }) {
                 Sign In
               </button>
             )}
-          </div>
-          <div>
-            <button onClick={toggleDarkMode} className="p-2">
-              {colorTheme === 'dark' ? <Sun /> : <Moon />}
-            </button>
           </div>
         </div>
       </div>

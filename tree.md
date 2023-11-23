@@ -52,6 +52,7 @@ co-valence
  ┃ ┣ prisma.ts
  ┃ ┗ utils.ts
  ┣ pages
+ ┣ ┣ _app.tsx
  ┃ ┗dashboard.tsx
  ┣ prisma
  ┃ ┗ schema.prisma

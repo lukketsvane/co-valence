@@ -1,27 +1,50 @@
-import { useState, useRef } from "react";
-import Image from 'next/image';
+import { useState, useRef, useEffect } from "react";
+import OpenAI from "openai";
 import { FiSend } from 'react-icons/fi';
+
+const openai = new OpenAI({
+  apiKey: 'process.env.OPENAI_API_KEY',
+  dangerouslyAllowBrowser: true, 
+});
 
 
 
 export default function ChatBox({ title = "Describe a study", initialMessages = [] }) {
-  const [messages, setMessages] = useState<string[]>(initialMessages);
+  const [messages, setMessages] = useState([...initialMessages]);
   const messageInputRef = useRef<HTMLDivElement>(null);
 
-  const sanitizeInput = (text) => {
-    // You can extend this function to perform more sophisticated sanitization
-    return text.replace(/<\/?[^>]+(>|$)/g, ""); // Removes HTML tags
-  };
+  useEffect(() => {
+    // Handle streaming completions here if needed
+  }, [messages]);
 
-  const handleSendMessage = () => {
+  const handleSendMessage = async () => {
     if (messageInputRef.current) {
-      const sanitizedMessage = sanitizeInput(messageInputRef.current.innerText);
-      if (sanitizedMessage.trim() !== "") {
-        setMessages([...messages, sanitizedMessage]);
-        messageInputRef.current.innerText = ""; // Clear the contenteditable div
+      const userMessage = messageInputRef.current.innerText.trim();
+      if (userMessage !== "") {
+        setMessages(prevMessages => [...prevMessages, { role: 'user', content: userMessage }]);
+        messageInputRef.current.innerText = ""; // Clear the input
+  
+        try {
+          const completion = await openai.chat.completions.create({
+            model: "gpt-4-1106-preview",
+            messages: [
+              { role: "system", content: "You are a helpful assistant." },
+              { role: "user", content: userMessage }
+            ],
+            stream: true,
+          });
+  
+          for await (const chunk of completion) {
+            setMessages(prevMessages => [...prevMessages, { role: 'assistant', content: chunk.choices[0].delta.content }]);
+          }
+        } catch (error) {
+          console.error("Error getting completion:", error);
+          setMessages(prevMessages => [...prevMessages, { role: 'assistant', content: "Failed to get a response." }]);
+        }
       }
     }
   };
+  
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
@@ -46,17 +69,18 @@ export default function ChatBox({ title = "Describe a study", initialMessages = 
         </div>
       </div>
       <div className="p-4 pr-16 ">
-        <div className="h-auto overflow-y-auto mb-4">
-          {messages.length > 0 ? (
-            messages.map((message, index) => (
-              <div key={index} className="p-2 pr-6 bg-white rounded-lg shadow mb-2">
-                {message}
-              </div>
-            ))
-          ) : (
-            <div className="text-gray-400 italic">No messages...</div>
-          )}
-        </div>
+      <div className="h-auto overflow-y-auto mb-4">
+        {messages.length > 0 ? (
+          messages.map((message, index) => (
+            <div key={index} className="p-2 pr-6 bg-white rounded-lg shadow mb-2">
+              {/* Render the content of the message */}
+              {message.content}
+            </div>
+          ))
+        ) : (
+          <div className="text-gray-400 italic">No messages...</div>
+        )}
+      </div>
         <div
           ref={messageInputRef}
           onKeyPress={handleKeyPress}

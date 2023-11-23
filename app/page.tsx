@@ -13,27 +13,29 @@ export default function Home() {
 
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ delay: 0.2, duration: 1 }}
+
     >
-      <div className="w-full max-w-xl px-5 xl:px-0">
-        <motion.h1
-          initial={{ y: -100, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.2, duration: 1 }}
-          className="bg-gradient-to-br from-green-300 to-blue-500 bg-clip-text text-center font-display text-4xl font-bold md:text-7xl"
-        >
-          co:valence
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4, duration: 1 }}
-          className="mt-6 text-center text-gray-500 md:text-xl dark:text-gray-300"
-        >
-          A modern toolkit for psychological health professionals.
-        </motion.p>
+            <div className="w-full max-w-xl px-5 xl:px-0">
+              <motion.h1
+                initial={{ y: -100, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.2, duration: 1 }}
+                className="bg-gradient-to-br from-green-300 to-blue- text-center font-display text-4xl font-bold md:text-7xl"
+              >
+                co:valence
+              </motion.h1>
+              <motion.p
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.4, duration: 1 }}
+                className="mt-6 text-center text-gray-500 md:text-xl dark:text-gray-300"
+              >
+                A modern toolkit for psychological health professionals.
+              </motion.p>
+
       </div>
       <div className="my-10 grid w-full max-w-screen-xl grid-cols-1 gap-5 px-5 md:grid-cols-3 xl:px-0">
         {features.map(({ title, description, demo, large }) => (

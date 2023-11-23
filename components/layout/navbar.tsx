@@ -6,10 +6,24 @@ import useScroll from "@/lib/hooks/use-scroll";
 import { useSignInModal } from "./sign-in-modal";
 import UserDropdown from "./user-dropdown";
 import { Session } from "next-auth";
+import { useState, useEffect } from "react";
+import { Sun, Moon } from "lucide-react";
 
 export default function NavBar({ session }: { session: Session | null }) {
   const { SignInModal, setShowSignInModal } = useSignInModal();
   const scrolled = useScroll(50);
+  const [darkMode, setDarkMode] = useState(false);
+
+  useEffect(() => {
+    const savedMode = localStorage.getItem('dark-mode');
+    setDarkMode(savedMode === 'true');
+  }, []);
+
+  const toggleDarkMode = () => {
+    localStorage.setItem('dark-mode', (!darkMode).toString());
+    setDarkMode(!darkMode);
+    document.body.classList.toggle('dark');
+  };
 
   return (
     <>
@@ -17,8 +31,8 @@ export default function NavBar({ session }: { session: Session | null }) {
       <div
         className={`fixed top-0 w-full flex justify-center ${
           scrolled
-            ? "border-b border-gray-200 bg-white/50 backdrop-blur-xl"
-            : "bg-white/0"
+            ? "border-b border-gray-200 bg-white/50 backdrop-blur-xl dark:border-gray-700 dark:bg-gray-800/50"
+            : "bg-white/0 dark:bg-gray-800/0"
         } z-30 transition-all`}
       >
         <div className="mx-5 flex h-16 max-w-screen-xl items-center justify-between w-full">
@@ -32,12 +46,18 @@ export default function NavBar({ session }: { session: Session | null }) {
             ></Image>
             <p>co:valance</p>
           </Link>
-          <div>
+          <div className="flex items-center">
+            <button
+              onClick={toggleDarkMode}
+              className="mr-4 p-2 text-xl text-gray-800 dark:text-gray-200"
+            >
+              {darkMode ? <Sun /> : <Moon />}
+            </button>
             {session ? (
               <UserDropdown session={session} />
             ) : (
               <button
-                className="rounded-full border border-black bg-black p-1.5 px-4 text-sm text-white transition-all hover:bg-white hover:text-black"
+                className="rounded-full border border-black dark:border-white bg-black p-1.5 px-4 text-sm text-white transition-all hover:bg-white hover:text-black dark:hover:bg-black dark:hover:text-white"
                 onClick={() => setShowSignInModal(true)}
               >
                 Sign In

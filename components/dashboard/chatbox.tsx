@@ -20,13 +20,13 @@ export default function ChatBox({
     }
   };
 
-  const handleKeyPress = (e) => {
+  const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       handleSendMessage();
     }
   };
-
+  
   return (
     <div className="relative max-w-2xl mx-auto my-6 overflow-hidden rounded-lg border border-gray-200 bg-white shadow">
       <div className="flex justify-between items-center p-4 bg-gray-50 border-b border-gray-200">

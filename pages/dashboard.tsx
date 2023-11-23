@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import { useSession } from 'next-auth/react';
 import Layout from '@/components/layout/layout';
+import '@/app/globals.css';
 
 export default function Dashboard() {
   const { data: session, status } = useSession();

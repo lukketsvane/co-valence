@@ -23,7 +23,6 @@ export default function RootLayout({
       <Head>
         <title>{metadata.title}</title>
         <meta name="description" content={metadata.description} />
-        <meta name="theme-color" content={metadata.themeColor} />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <body className={cx(sfPro.variable, inter.variable)}>

@@ -7,11 +7,15 @@ export default function Card({
   description,
   demo,
   large,
+  colorTheme, // Add colorTheme prop
+  toggleDarkMode, // Add toggleDarkMode prop
 }: {
   title: string;
   description: string;
   demo: ReactNode;
   large?: boolean;
+  colorTheme: string; // Define colorTheme prop
+  toggleDarkMode: () => void; // Define toggleDarkMode prop
 }) {
   return (
     <motion.div
@@ -19,7 +23,7 @@ export default function Card({
       whileTap={{ scale: 0.95 }}
       className={`relative col-span-1 h-96 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-md ${
         large ? "md:col-span-2" : ""
-      } dark:border-gray-700 dark:bg-gray-800`}
+      } ${colorTheme === "dark" ? "dark:border-gray-700 dark:bg-gray-800" : ""}`}
     >
       <div className="flex h-60 items-center justify-center">{demo}</div>
       <div className="mx-auto max-w-md text-center">

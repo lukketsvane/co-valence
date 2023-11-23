@@ -1,17 +1,15 @@
 "use client";
+
 import Image from "next/image";
 import Link from "next/link";
 import useScroll from "@/lib/hooks/use-scroll";
 import { useSignInModal } from "./sign-in-modal";
 import UserDropdown from "./user-dropdown";
 import { Session } from "next-auth";
-import useDarkSide from "@/lib/hooks/use-dark-mode"; // Import the custom dark mode hook
-import { Moon, Sun } from 'lucide-react'; // Import Moon and Sun icons
 
 export default function NavBar({ session }: { session: Session | null }) {
   const { SignInModal, setShowSignInModal } = useSignInModal();
   const scrolled = useScroll(50);
-  const [colorTheme, toggleDarkMode] = useDarkSide(); // Use the custom dark mode hook
 
   return (
     <>
@@ -34,22 +32,12 @@ export default function NavBar({ session }: { session: Session | null }) {
             ></Image>
             <p>co:valance</p>
           </Link>
-
-          <div>
-            <button onClick={toggleDarkMode} className="p-2">
-              {colorTheme === 'dark' ? <Sun /> : <Moon />}
-            </button>
-          </div>
           <div>
             {session ? (
               <UserDropdown session={session} />
             ) : (
               <button
-                className={`rounded-full border ${
-                  colorTheme === "dark"
-                    ? "border-white bg-white text-black"
-                    : "border-black bg-black text-white"
-                } p-1.5 px-4 text-sm transition-all hover:bg-black hover:text-white`}
+                className="rounded-full border border-black bg-black p-1.5 px-4 text-sm text-white transition-all hover:bg-white hover:text-black"
                 onClick={() => setShowSignInModal(true)}
               >
                 Sign In

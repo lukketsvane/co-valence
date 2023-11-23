@@ -1,42 +1,40 @@
 .sidebar {
-  position: fixed; /* Makes the sidebar static on the screen */
-  top: 0; /* Aligns the sidebar to the top of the viewport */
-  left: 0; /* Aligns the sidebar to the left of the viewport */
-  width: 250px; /* Adjust the width as needed */
-  height: 100vh; /* 100% of the viewport height */
-  background-color: #f4f4f4; /* Give it a background color */
-  overflow-y: auto; /* Allows scrolling if the content is taller than the screen */
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1); /* Optional: adds a shadow to the right edge */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 100vh;
+  background-color: #f4f4f4;
+  overflow-y: auto;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
 }
 
 .sidebar ul {
-  list-style: none; /* Removes bullet points from the list */
-  padding: 0; /* Removes default padding */
-  margin: 0; /* Removes default margin */
+  list-style: none;
+  padding: 0;
+  margin: 0;
 }
 
 .sidebar li button {
-  display: block; /* Makes the button fill the horizontal space */
-  width: 100%; /* Ensures the button width fills the container */
-  padding: 10px; /* Adds some padding inside the buttons */
-  text-align: left; /* Aligns text to the left */
-  border: none; /* Removes button border */
-  background: none; /* Removes button background */
-  outline: none; /* Removes focus outline */
-  transition: background-color 0.3s; /* Smooth transition for hover effect */
+  display: block;
+  width: 100%;
+  padding: 10px;
+  text-align: left;
+  border: none;
+  background: none;
+  outline: none;
+  transition: background-color 0.3s;
 }
 
 .sidebar li button:hover {
-  background-color: #eaeaea; /* Color when hovering over button */
+  background-color: #eaeaea;
 }
 
 .sidebar .icon {
-  margin-right: 10px; /* Space between icon and text */
+  margin-right: 10px;
 }
 
-/* Add the class for the selected item */
 .sidebarItemSelected {
   background-color: #blue; /* Replace with the actual color code from your design */
-  color: white; /* Adjust text color if needed */
-  /* Add other styles as needed to match your design */
+  color: white;
 }

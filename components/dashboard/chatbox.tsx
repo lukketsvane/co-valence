@@ -1,50 +1,37 @@
-import { useState, useRef, useEffect } from "react";
-import OpenAI from "openai";
+import { useState, useRef } from "react";
 import { FiSend } from 'react-icons/fi';
 
-const openai = new OpenAI({
-  apiKey: 'process.env.OPENAI_API_KEY',
-  dangerouslyAllowBrowser: true, 
-});
+type Message = {
+  role: 'user' | 'assistant';
+  content: string;
+};
 
-
-
-export default function ChatBox({ title = "Describe a study", initialMessages = [] }) {
-  const [messages, setMessages] = useState([...initialMessages]);
+export default function ChatBox({ title = "Describe a study", initialMessages = [] }: { title?: string; initialMessages?: Message[] }) {
+  const [messages, setMessages] = useState<Message[]>(initialMessages);
   const messageInputRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    // Handle streaming completions here if needed
-  }, [messages]);
 
   const handleSendMessage = async () => {
     if (messageInputRef.current) {
       const userMessage = messageInputRef.current.innerText.trim();
       if (userMessage !== "") {
         setMessages(prevMessages => [...prevMessages, { role: 'user', content: userMessage }]);
-        messageInputRef.current.innerText = ""; // Clear the input
-  
+        messageInputRef.current.innerText = "";
         try {
-          const completion = await openai.chat.completions.create({
-            model: "gpt-4-1106-preview",
-            messages: [
-              { role: "system", content: "You are a helpful assistant." },
-              { role: "user", content: userMessage }
-            ],
-            stream: true,
+          const response = await fetch('/api/openai', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ message: userMessage }),
           });
-  
-          for await (const chunk of completion) {
-            setMessages(prevMessages => [...prevMessages, { role: 'assistant', content: chunk.choices[0].delta.content }]);
-          }
+          if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+          const data = await response.json();
+          setMessages(prevMessages => [...prevMessages, { role: 'assistant', content: data.message }]);
         } catch (error) {
-          console.error("Error getting completion:", error);
+          console.error("Error:", error);
           setMessages(prevMessages => [...prevMessages, { role: 'assistant', content: "Failed to get a response." }]);
         }
       }
     }
-  };
-  
+  };  
 
   const handleKeyPress = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {

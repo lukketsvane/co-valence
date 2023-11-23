@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import Layout from '@/components/layout/layout';
 import ChatBox from '@/components/dashboard/chatbox';
-import Sidebar, { Agent } from '@/components/dashboard/sidebar'; // Ensure to import the Agent type
+import Sidebar, { Agent } from '@/components/dashboard/sidebar'; // Make sure to import the Agent type
 import '@/app/globals.css';
 
 export default function Dashboard() {
@@ -25,7 +25,6 @@ export default function Dashboard() {
     setSystemMessage(agent.systemMessage);
     setSelectedAgentName(agent.name); // Update the selected agent name
   };
-
 
   return (
     <Layout>

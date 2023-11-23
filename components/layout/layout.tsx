@@ -1,20 +1,23 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 import { useSession } from 'next-auth/react';
-import Navbar from './navbar'; // Adjust the path as necessary
-import Footer from './footer'; // Adjust the path as necessary
+import Navbar from './navbar'; 
+import Footer from './footer'; 
 
 interface LayoutProps {
-  children: ReactNode;
+  children: React.ReactNode; 
 }
 
 const Layout = ({ children }: LayoutProps) => {
-  const { data: session } = useSession(); // Get the session data
+  const { data: session } = useSession(); 
 
   return (
     <>
       <Navbar session={session} />
-      <main className="items-center justify-center py-22 px-4 md:px-8">
-        <div className="max-w">{children}</div>
+      <div className="bg-gradient-to-br from-indigo-50 via-white to-cyan-100" />
+      <main className="flex flex-col items-center justify-center w-full min-h-screen pt-32">
+        <div className="w-full max-w-4xl px-4 md:px-8 lg:px-16">
+          {children}
+        </div>
       </main>
       <Footer />
     </>

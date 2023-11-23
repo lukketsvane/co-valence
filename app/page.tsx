@@ -1,58 +1,70 @@
+
 "use client";
-import { motion } from 'framer-motion';
 import Card from "@/components/home/card";
+import { DEPLOY_URL } from "@/lib/constants";
+import { Github, Twitter } from "@/components/shared/icons";
+import WebVitals from "@/components/home/web-vitals";
 import ComponentGrid from "@/components/home/component-grid";
 import Image from "next/image";
-import useSWR from 'swr';
+import { nFormatter } from "@/lib/utils";
 
-const fetcher = (url: RequestInfo | URL) => fetch(url).then(r => r.json());
-
-export default function Home() {
-  const { data, error } = useSWR("https://api.github.com/repos/lukketsvane/co-valence", fetcher);
-  const stars = data ? data.stargazers_count : 0;
+export default async function Home() {
+  const { stargazers_count: stars } = await fetch(
+    "https://api.github.com/repos/steven-tey/precedent",
+    {
+      ...(process.env.GITHUB_OAUTH_TOKEN && {
+        headers: {
+          Authorization: `Bearer ${process.env.GITHUB_OAUTH_TOKEN}`,
+          "Content-Type": "application/json",
+        },
+      }),
+      // data will revalidate every 24 hours
+      next: { revalidate: 86400 },
+    },
+  )
+    .then((res) => res.json())
+    .catch((e) => console.log(e));
 
   return (
-    <motion.div
-      initial={{ y: -100, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ delay: 0.2, duration: 1 }}
-      
-      className="dark:bg-gray-100"
-    >
-      <div className="z-100 w-full max-w-xl px-5 xl:px-0">
-        <motion.h1
-          initial={{ y: -100, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{ delay: 0.2, duration: 1 }}
-
-          className="bg-gradient-to-br from-green-300 to-blue-500 bg-clip-text text-center font-display text-4xl font-bold md:text-7xl"
+    <>
+      <div className="z-10 w-full max-w-xl px-5 xl:px-0">
+        <h1
+          className="animate-fade-up bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-display text-4xl font-bold tracking-[-0.02em] text-transparent opacity-0 drop-shadow-sm [text-wrap:balance] md:text-7xl md:leading-[5rem]"
+          style={{ animationDelay: "0.15s", animationFillMode: "forwards" }}
         >
           co:valence
-        </motion.h1>
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.4, duration: 1 }}
-
-          className="mt-6 text-center text-gray-500 md:text-xl dark:text-gray-300"
+        </h1>
+        <p
+          className="mt-6 animate-fade-up text-center text-gray-500 opacity-0 [text-wrap:balance] md:text-xl"
+          style={{ animationDelay: "0.25s", animationFillMode: "forwards" }}
         >
           A modern toolkit for psychological health professionals.
-        </motion.p>
-
-
+        </p>
+        <div
+          className="mx-auto mt-6 flex animate-fade-up items-center justify-center space-x-5 opacity-0"
+          style={{ animationDelay: "0.3s", animationFillMode: "forwards" }}
+        >
+          
+        </div>
       </div>
-      <div className="my-10 grid w-full max-w-screen-xl grid-cols-1 gap-5 px-5 md:grid-cols-3 xl:px-0">
+      <div className="my-10 grid w-full max-w-screen-xl animate-fade-up grid-cols-1 gap-5 px-5 md:grid-cols-3 xl:px-0">
         {features.map(({ title, description, demo, large }) => (
           <Card
             key={title}
             title={title}
             description={description}
-            demo={demo}
+            demo={
+              title === "Beautiful, reusable components" ? (
+                <ComponentGrid />
+              ) : (
+                demo
+              )
+            }
             large={large}
           />
         ))}
       </div>
-    </motion.div>
+    </>
   );
 }
 
@@ -66,26 +78,26 @@ const features = [
   {
     title: "Patient Journaling System",
     description: "Maintain patient records with ease using a secure and intuitive journaling system, accessible from anywhere.",
-    demo: <Image src="/logo.png" alt="Journal Demo" width={300} height={200} />, 
+    demo: <Image src="/logo.png" alt="Journal Demo" width={300} height={200} />, // Make sure this file exists in the `public` folder.
   },
   {
     title: "Data-Driven Insights",
     description: "Gain valuable insights into patient trends with data analytics tools, helping you make informed decisions.",
-    demo: <Image src="/logo.png"  alt="Data Insights Demo" width={300} height={200} />,
+    demo: <Image src="/logo.png" alt="Data Insights Demo" width={300} height={200} />, // Replace with the actual image or component.
   },
   {
     title: "Appointment Scheduling",
     description: "Streamline your appointment booking process with an integrated scheduling tool that syncs with your calendar.",
-    demo: <Image src="/logo.png"  alt="Scheduling Demo" width={300} height={200} />, 
+    demo: <Image src="/logo.png" alt="Scheduling Demo" width={300} height={200} />, // Replace with the actual image or component.
   },
   {
     title: "Resource Library",
     description: "Access a wealth of mental health resources, articles, and research papers to support your practice.",
-    demo: <Image src="/logo.png" alt="Resources Demo" width={300} height={200} />, 
+    demo: <Image src="/logo.png" alt="Resources Demo" width={300} height={200} />, // Replace with the actual image or component.
   },
   {
     title: "Telehealth Ready",
     description: "Conduct remote consultations with a built-in telehealth feature that offers both video and messaging capabilities.",
-    demo: <Image src="/logo.png" alt="Telehealth Demo" width={300} height={200} />, 
+    demo: <Image src="/logo.png" alt="Telehealth Demo" width={300} height={200} />, // Replace with the actual image or component.
   }
 ];

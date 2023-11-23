@@ -2,7 +2,7 @@
 import { ImageResponse } from "next/server";
 
 export const runtime = "edge";
-export const alt = "Co:valence - Building blocks for your Next.js project";
+export const alt = "Precedent - Building blocks for your Next.js project";
 export const contentType = "image/png";
 
 export default async function OG() {
@@ -27,7 +27,7 @@ export default async function OG() {
       >
         <img
           src={`https://${process.env.VERCEL_URL || "precedent.dev"}/logo.png`}
-          alt="Co:valence Logo"
+          alt="Precedent Logo"
           tw="w-20 h-20 mb-4 opacity-95"
         />
         <h1
@@ -37,11 +37,12 @@ export default async function OG() {
             background:
               "linear-gradient(to bottom right, #000000 21.66%, #78716c 86.47%)",
             backgroundClip: "text",
+            color: "transparent",
             lineHeight: "5rem",
             letterSpacing: "-0.02em",
           }}
         >
-          Co:valence
+          Precedent
         </h1>
       </div>
     ),

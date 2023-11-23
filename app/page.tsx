@@ -1,27 +1,30 @@
 "use client";
 import Card from "@/components/home/card";
+import { DEPLOY_URL } from "@/lib/constants";
+import { Github, Twitter } from "@/components/shared/icons";
+import WebVitals from "@/components/home/web-vitals";
 import ComponentGrid from "@/components/home/component-grid";
 import Image from "next/image";
-import { useState, useEffect } from "react";
-import { Moon, Sun } from 'lucide-react';
+import { nFormatter } from "@/lib/utils";
 
-export default function Home() {
-  const [stars, setStars] = useState(0);
 
-  useEffect(() => {
-    fetch("https://api.github.com/repos/steven-tey/precedent", {
+export default async function Home() {
+  const { stargazers_count: stars } = await fetch(
+    "https://api.github.com/repos/steven-tey/precedent",
+    {
       ...(process.env.GITHUB_OAUTH_TOKEN && {
         headers: {
           Authorization: `Bearer ${process.env.GITHUB_OAUTH_TOKEN}`,
           "Content-Type": "application/json",
         },
       }),
-    })
-      .then((res) => res.json())
-      .then((data) => setStars(data.stargazers_count))
-      .catch((e) => console.log(e));
-  }, []);
-  
+      // data will revalidate every 24 hours
+      next: { revalidate: 86400 },
+    },
+  )
+    .then((res) => res.json())
+    .catch((e) => console.log(e));
+
   return (
     <>
       <div className="z-10 w-full max-w-xl px-5 xl:px-0">
@@ -37,7 +40,6 @@ export default function Home() {
         >
           A modern toolkit for psychological health professionals.
         </p>
-
         <div
           className="mx-auto mt-6 flex animate-fade-up items-center justify-center space-x-5 opacity-0"
           style={{ animationDelay: "0.3s", animationFillMode: "forwards" }}
@@ -73,29 +75,40 @@ const features = [
     demo: <ComponentGrid />, 
     large: true,
   },
+  
   {
-    title: "Patient Journaling System",
-    description: "Maintain patient records with ease using a secure and intuitive journaling system, accessible from anywhere.",
-    demo: <Image src="/logo.png" alt="Journal Demo" width={300} height={200} />, // Make sure this file exists in the `public` folder.
+    title: "Data-Driven Insights",
+    description:
+      "Built on [Next.js](https://nextjs.org/) primitives like `@next/font` and `next/image` for stellar performance.",
+    demo: <WebVitals />,
   },
   {
     title: "Data-Driven Insights",
     description: "Gain valuable insights into patient trends with data analytics tools, helping you make informed decisions.",
-    demo: <Image src="/logo.png" alt="Data Insights Demo" width={300} height={200} />, // Replace with the actual image or component.
+    demo: <Image src="/covalence.png" alt="Data Insights Demo" width={300} height={200} />,
   },
   {
-    title: "Appointment Scheduling",
-    description: "Streamline your appointment booking process with an integrated scheduling tool that syncs with your calendar.",
-    demo: <Image src="/logo.png" alt="Scheduling Demo" width={300} height={200} />, // Replace with the actual image or component.
+    title: "Built-in Auth + Database",
+    description: "Precedent comes with authentication and database via [Auth.js](https://authjs.dev/) + [Prisma](https://prisma.io/)",
+    demo: (
+      <div className="flex items-center justify-center space-x-20">
+        <Image alt="Auth.js logo" src="/authjs.webp" width={50} height={50} />
+        <Image alt="Prisma logo" src="/prisma.svg" width={50} height={50} />
+      </div>
+    ),
   },
   {
-    title: "Resource Library",
-    description: "Access a wealth of mental health resources, articles, and research papers to support your practice.",
-    demo: <Image src="/logo.png" alt="Resources Demo" width={300} height={200} />, // Replace with the actual image or component.
+    title: "Hooks, utilities, and more",
+    description: "Precedent offers a collection of hooks, utilities, and `@vercel/og`",
+    demo: (
+      <div className="grid grid-flow-col grid-rows-3 gap-10 p-10">
+        <span className="font-mono font-semibold">useIntersectionObserver</span>
+        <span className="font-mono font-semibold">useLocalStorage</span>
+        <span className="font-mono font-semibold">useScroll</span>
+        <span className="font-mono font-semibold">nFormatter</span>
+        <span className="font-mono font-semibold">capitalize</span>
+        <span className="font-mono font-semibold">truncate</span>
+      </div>
+    ),
   },
-  {
-    title: "Telehealth Ready",
-    description: "Conduct remote consultations with a built-in telehealth feature that offers both video and messaging capabilities.",
-    demo: <Image src="/logo.png" alt="Telehealth Demo" width={300} height={200} />, // Replace with the actual image or component.
-  }
 ];

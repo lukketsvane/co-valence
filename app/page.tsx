@@ -27,9 +27,9 @@ export default async function Home() {
 
   return (
     <>
-      <div className="z-10 w-full max-w-xl px-5 xl:px-0">
+      <div className="z-10 h-fit w-full max-w-xl px-5 xl:px-0">
         <h1
-          className="animate-fade-up bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-display text-4xl font-bold tracking-[-0.02em] text-transparent opacity-0 drop-shadow-sm [text-wrap:balance] md:text-7xl md:leading-[5rem]"
+          className="py-10 animate-fade-up bg-gradient-to-br from-black to-stone-500 bg-clip-text text-center font-display text-6xl font-bold tracking-[-0.02em] text-transparent opacity-0 drop-shadow-sm [text-wrap:balance] md:text-9xl md:leading-[5rem]"
           style={{ animationDelay: "0.15s", animationFillMode: "forwards" }}
         >
           co:valence
@@ -38,13 +38,12 @@ export default async function Home() {
           className="mt-6 animate-fade-up text-center text-gray-500 opacity-0 [text-wrap:balance] md:text-xl"
           style={{ animationDelay: "0.25s", animationFillMode: "forwards" }}
         >
-          A modern toolkit for psychological health professionals.
+          Revolutionizing healthcare with AI-driven assistance for psychological health professionals.
         </p>
         <div
           className="mx-auto mt-6 flex animate-fade-up items-center justify-center space-x-5 opacity-0"
           style={{ animationDelay: "0.3s", animationFillMode: "forwards" }}
         >
-          
         </div>
       </div>
       <div className="my-10 grid w-full max-w-screen-xl animate-fade-up grid-cols-1 gap-5 px-5 md:grid-cols-3 xl:px-0">
@@ -53,13 +52,7 @@ export default async function Home() {
             key={title}
             title={title}
             description={description}
-            demo={
-              title === "Beautiful, reusable components" ? (
-                <ComponentGrid />
-              ) : (
-                demo
-              )
-            }
+            demo={title === "Interactive Chatbot" ? <ComponentGrid /> : demo}
             large={large}
           />
         ))}
@@ -71,48 +64,43 @@ export default async function Home() {
 const features = [
   {
     title: "Interactive Chatbot",
-    description: "Engage with patients using a smart AI-driven chatbot that helps in preliminary diagnosis and common inquiries.",
+    description: "Enhance diagnosis and patient communication with AI-driven chatbot capabilities, based on advanced GPT technology and semantic search.",
     demo: <ComponentGrid />, 
     large: true,
   },
-  
   {
-    title: "Data-Driven Insights",
-    description:
-      "Built on [Next.js](https://nextjs.org/) primitives like `@next/font` and `next/image` for stellar performance.",
+    title: "Semantic Scholar Integration",
+    description: "Access semantically similar medical papers and records instantly, refining and streamlining the data search process for healthcare professionals.",
     demo: <WebVitals />,
   },
   {
-    title: "Data-Driven Insights",
-    description: "Gain valuable insights into patient trends with data analytics tools, helping you make informed decisions.",
+    title: "Diagnostic Accuracy",
+    description: "Employ DSM-5 standards and Joint Catalogue data for improved diagnostic accuracy, identifying comorbidities and reducing misdiagnosis rates.",
     demo: (
       <div className="grid grid-flow-col grid-rows-3 gap-10 p-10">
-        <span className="font-mono font-semibold">useIntersectionObserver</span>
-        <span className="font-mono font-semibold">truncate</span>
-      </div>
-      ),
-  },
-  {
-    title: "Built-in Auth + Database",
-    description: "Precedent comes with authentication and database via [Auth.js](https://authjs.dev/) + [Prisma](https://prisma.io/)",
-    demo: (
-      <div className="flex items-center justify-center space-x-20">
-        <Image alt="Auth.js logo" src="/authjs.webp" width={50} height={50} />
-        <Image alt="Prisma logo" src="/prisma.svg" width={50} height={50} />
+        <span className="font-mono font-semibold">DSM-5 Lookup</span>
+        <span className="font-mono font-semibold">Comorbidity Analysis</span>
       </div>
     ),
   },
   {
-    title: "Hooks, utilities, and more",
-    description: "Precedent offers a collection of hooks, utilities, and `@vercel/og`",
+    title: "Integrated Medical Journal",
+    description: "Keep patient records organized and accessible with an integrated journal system underpinned by a secure online database.",
+    demo: (
+      <div className="flex items-center justify-center space-x-20">
+        <Image alt="Secure Database" src="/database-icon.svg" width={50} height={50} />
+        <Image alt="Medical Journal" src="/journal-icon.svg" width={50} height={50} />
+      </div>
+    ),
+  },
+  {
+    title: "Innovative Healthcare Utilites",
+    description: "Explore a collection of healthcare-focused utilities and hooks to enhance the functionality and efficiency of patient care.",
     demo: (
       <div className="grid grid-flow-col grid-rows-3 gap-10 p-10">
-        <span className="font-mono font-semibold">useIntersectionObserver</span>
-        <span className="font-mono font-semibold">useLocalStorage</span>
-        <span className="font-mono font-semibold">useScroll</span>
-        <span className="font-mono font-semibold">nFormatter</span>
-        <span className="font-mono font-semibold">capitalize</span>
-        <span className="font-mono font-semibold">truncate</span>
+        <span className="font-mono font-semibold">usePatientHistory</span>
+        <span className="font-mono font-semibold">useCaseReview</span>
+        <span className="font-mono font-semibold">useMedicationTracker</span>
       </div>
     ),
   },

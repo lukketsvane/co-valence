@@ -2,26 +2,3 @@
 @tailwind components;
 @tailwind utilities;
 
-
-:root {
-  --background-color: #ffffff;
-  --text-color: #000000;
-  --link-color: #0000ff;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background-color: #121212;
-    --text-color: #ffffff;
-    --link-color: #bb86fc;
-  }
-}
-
-.card {
-  background-color: var(--background-color);
-  color: var(--text-color);
-}
-
-.dark .card {
-  /* Dark mode specific styles */
-}

@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { FiSend, FiClipboard } from 'react-icons/fi';
 import ReactMarkdown from 'react-markdown';
-import 'github-markdown-css'; // Import the CSS for Markdown styling
+import 'github-markdown-css'; 
 
 type Message = {
   role: 'user' | 'assistant';
@@ -14,7 +14,29 @@ export default function ChatBox({ title = "Describe a study", initialMessages = 
   const [messagePending, setMessagePending] = useState(false);
   const messageInputRef = useRef<HTMLDivElement>(null);
 
-  // Function to copy the response to the clipboard
+  useEffect(() => {
+    let intervalId: NodeJS.Timeout | null = null; 
+
+    if (messagePending) {
+      intervalId = toggleLoaderDots(); 
+    }
+
+    return () => {
+      if (intervalId) clearInterval(intervalId);
+    };
+  }, [messagePending]);
+
+  function toggleLoaderDots(): NodeJS.Timeout {
+    const dots = document.querySelectorAll('.loader .dot');
+    let activeIndex = 0;
+
+    return setInterval(() => {
+      dots.forEach(dot => dot.classList.remove('active'));
+      dots[activeIndex].classList.add('active');
+      activeIndex = (activeIndex + 1) % dots.length;
+    }, 500);
+  }
+
   const copyToClipboard = (text: string) => {
     navigator.clipboard.writeText(text).then(() => {
       alert('Response copied to clipboard!');
@@ -24,10 +46,10 @@ export default function ChatBox({ title = "Describe a study", initialMessages = 
   };
 
   const handleSendMessage = async () => {
-    if (messageInputRef.current && !messagePending) {
+    if (messageInputRef.current) {
       const userMessage = messageInputRef.current.innerText.trim();
       if (userMessage !== "") {
-        setMessages([{ role: 'user', content: userMessage }]); // Only show the last user message
+        setMessages([{ role: 'user', content: userMessage }]);
         messageInputRef.current.innerText = "";
         try {
           const response = await fetch('/api/openai', {
@@ -37,12 +59,12 @@ export default function ChatBox({ title = "Describe a study", initialMessages = 
           });
           if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
           const data = await response.json();
-          setOpenaiResponse(data.message); // set the OpenAI response
-          setMessagePending(false); // Allow sending a new message
+          setOpenaiResponse(data.message); 
         } catch (error) {
           console.error("Error:", error);
-          setOpenaiResponse("Failed to get a response."); // set error message
-          setMessagePending(false); // Allow sending a new message
+          setOpenaiResponse("Failed to get a response."); 
+        } finally {
+          setMessagePending(false);
         }
       }
     }
@@ -69,16 +91,20 @@ export default function ChatBox({ title = "Describe a study", initialMessages = 
             <h2 className="text-lg font-semibold">{title}</h2>
             <p className="text-sm text-gray-600">Industry: Oil & Gas Industry | Application: Offshore Drilling Operations</p>
           </div>
+          {messagePending && (
+            <div className="loader">
+              <span className="dot"></span>
+              <span className="dot"></span>
+              <span className="dot"></span>
+            </div>
+          )}
         </div>
         <div className="p-4 pr-16">
           <div className="h-auto overflow-y-auto mb-4">
-            {messages.length > 0 ? (
+            {messages.length > 0 && (
               <div className="p-2 pr-6 bg-white rounded-lg shadow mb-2">
-                {/* Render the content of the last message */}
-                {messages[0].content}
+                <ReactMarkdown>{messages[messages.length - 1].content}</ReactMarkdown>
               </div>
-            ) : (
-              <div className="text-gray-400 italic">No messages...</div>
             )}
           </div>
           {!messagePending && (
@@ -97,7 +123,7 @@ export default function ChatBox({ title = "Describe a study", initialMessages = 
           <div className="absolute bottom-3 right-4 p-auto">
             {!messagePending && (
               <button
-                style={{ minHeight: '50px' }} // Set a minimum height
+                style={{ minHeight: '50px' }} 
                 onClick={handleSendMessage}
                 aria-label="Send message"
                 className="text-black hover:text-blue-600"
@@ -115,7 +141,7 @@ export default function ChatBox({ title = "Describe a study", initialMessages = 
         </div>
         <button
           onClick={() => copyToClipboard(openaiResponse)}
-          className="mt-2 p-2 bg-gray-100 hover:bg-gray-100 text-black font-bold py-2 px-2 rounded"
+          className="mt-2 p-2 bg-gray-100 hover:bg-gray-100 text-black font-bold py-2 rounded"
           aria-label="Copy to clipboard"
         >
           <FiClipboard className="inline" size={22} />

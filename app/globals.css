@@ -47,3 +47,26 @@ body::-webkit-scrollbar, html::-webkit-scrollbar {
 .react-markdown ol {
   padding-left: 20px;
 }
+
+.loader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 20px; /* Adjust to match your design */
+  margin-left: 10px; /* Adjust to give space from the send button */
+}
+
+.dot {
+  height: 8px;
+  width: 8px;
+  margin: 0 4px;
+  background-color: #bbb; /* Inactive dot color */
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.3s;
+}
+
+/* Active state */
+.dot.active {
+  background-color: #ff3b30; /* Active dot color */
+}

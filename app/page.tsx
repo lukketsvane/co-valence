@@ -85,7 +85,12 @@ const features = [
   {
     title: "Data-Driven Insights",
     description: "Gain valuable insights into patient trends with data analytics tools, helping you make informed decisions.",
-    demo: <Image src="/covalence.png" alt="Data Insights Demo" width={300} height={200} />,
+    demo: (
+      <div className="grid grid-flow-col grid-rows-3 gap-10 p-10">
+        <span className="font-mono font-semibold">useIntersectionObserver</span>
+        <span className="font-mono font-semibold">truncate</span>
+      </div>
+      ),
   },
   {
     title: "Built-in Auth + Database",

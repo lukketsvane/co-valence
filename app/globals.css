@@ -70,3 +70,7 @@ body::-webkit-scrollbar, html::-webkit-scrollbar {
 .dot.active {
   background-color: #ff3b30; /* Active dot color */
 }
+
+.main-content {
+  margin-left: 250px; /* This should match the width of your sidebar */
+}

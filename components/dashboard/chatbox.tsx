@@ -101,10 +101,10 @@ export default function ChatBox({ title = "Describe a study", initialMessages = 
             </div>
           )}
         </div>
-        <div className="p-4 pr-16">
+        <div className="p-4">
           <div className="h-auto overflow-y-auto mb-4">
             {messages.length > 0 && (
-              <div className="p-2 pr-6 bg-white rounded-lg shadow mb-2">
+              <div className="p-2 px-6 bg-white rounded-lg shadow mb-2">
                 <ReactMarkdown>{messages[messages.length - 1].content}</ReactMarkdown>
               </div>
             )}

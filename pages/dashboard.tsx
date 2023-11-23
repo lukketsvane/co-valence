@@ -27,10 +27,9 @@ export default function Dashboard() {
     <Layout>
       <div className="flex">
         <Sidebar onAgentSelect={handleAgentSelect} />
-        <div className=" justify-center items-start pt:-14"> 
-          {/* Pass the systemMessage to ChatBox */}
+        <main className="main-content flex-1"> {/* Apply the class here */}
           <ChatBox title={`Welcome to Your Dashboard, ${userName}`} systemMessage={systemMessage} initialMessages={[]} />
-        </div>
+        </main>
       </div>
     </Layout>
   );

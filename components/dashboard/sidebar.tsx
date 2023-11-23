@@ -8,7 +8,14 @@ interface Agent {
   systemMessage: string;
 }
 
-// Define the props expected by the Sidebar component
+// sidebar.tsx
+
+export interface Agent {
+  name: string;
+  systemMessage: string;
+}
+
+// ... rest of the sidebar.tsx code
 interface SidebarProps {
   onAgentSelect: (agent: Agent) => void;
 }

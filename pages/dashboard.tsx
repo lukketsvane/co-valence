@@ -1,8 +1,10 @@
+// dashboard.tsx
+
 import React, { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import Layout from '@/components/layout/layout';
 import ChatBox from '@/components/dashboard/chatbox';
-import Sidebar from '@/components/dashboard/sidebar'; // Import the Sidebar component
+import Sidebar, { Agent } from '@/components/dashboard/sidebar'; // Import the Sidebar component and Agent interface
 import '@/app/globals.css';
 
 export default function Dashboard() {
@@ -19,7 +21,7 @@ export default function Dashboard() {
 
   const userName = session.user?.name || 'User';
 
-  const handleAgentSelect = (agent) => {
+  const handleAgentSelect = (agent: Agent) => { // Use the Agent type here
     setSystemMessage(agent.systemMessage);
   };
 
@@ -27,7 +29,7 @@ export default function Dashboard() {
     <Layout>
       <div className="flex">
         <Sidebar onAgentSelect={handleAgentSelect} />
-        <main className="main-content flex-1"> {/* Apply the class here */}
+        <main className="main-content flex-1">
           <ChatBox title={`Welcome to Your Dashboard, ${userName}`} systemMessage={systemMessage} initialMessages={[]} />
         </main>
       </div>

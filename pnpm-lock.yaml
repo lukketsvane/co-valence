@@ -125,6 +125,9 @@ dependencies:
   use-debounce:
     specifier: ^9.0.4
     version: 9.0.4(react@18.2.0)
+  use-theme:
+    specifier: ^0.1.5
+    version: 0.1.5(react@18.2.0)(tslib@2.6.2)
   vaul:
     specifier: ^0.6.8
     version: 0.6.8(@types/react-dom@18.2.8)(@types/react@18.2.24)(react-dom@18.2.0)(react@18.2.0)
@@ -7534,6 +7537,16 @@ packages:
       react: ^16.8.0 || ^17.0.0 || ^18.0.0
     dependencies:
       react: 18.2.0
+    dev: false
+
+  /use-theme@0.1.5(react@18.2.0)(tslib@2.6.2):
+    resolution: {integrity: sha512-XQFHi2yaTSDQUFRGeKtQYebWLxgc2wERR1Do5ljN3ALleHVO1JsVVfPQAPe+5+HsyW7oHnDFvCtOUsMeTho7PA==}
+    peerDependencies:
+      react: '>=16.8.0'
+      tslib: '*'
+    dependencies:
+      react: 18.2.0
+      tslib: 2.6.2
     dev: false
 
   /util-deprecate@1.0.2:

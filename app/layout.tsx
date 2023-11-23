@@ -31,6 +31,6 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <Analytics />
       </body>
       </head>
-      </>
+    </>
   );
 }

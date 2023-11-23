@@ -8,7 +8,8 @@ type Message = {
   content: string;
 };
 
-export default function ChatBox({ title = "Describe a study", initialMessages = [] }: { title?: string; initialMessages?: Message[] }) {
+// Add a new prop for systemMessage
+export default function ChatBox({ title = "Describe a study", initialMessages = [], systemMessage }: { title?: string; initialMessages?: Message[], systemMessage: string }) {
   const [messages, setMessages] = useState<Message[]>(initialMessages);
   const [openaiResponse, setOpenaiResponse] = useState('');
   const [messagePending, setMessagePending] = useState(false);
@@ -51,11 +52,12 @@ export default function ChatBox({ title = "Describe a study", initialMessages = 
       if (userMessage !== "") {
         setMessages([{ role: 'user', content: userMessage }]);
         messageInputRef.current.innerText = "";
+        setMessagePending(true);
         try {
           const response = await fetch('/api/openai', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ message: userMessage }),
+            body: JSON.stringify({ message: userMessage, systemMessage }), // Include systemMessage in the request
           });
           if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
           const data = await response.json();

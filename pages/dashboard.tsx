@@ -1,8 +1,9 @@
+// Import the Agent interface from the sidebar component file
 import React, { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import Layout from '@/components/layout/layout';
 import ChatBox from '@/components/dashboard/chatbox';
-import Sidebar, { Agent } from '@/components/dashboard/sidebar'; // Make sure to import the Agent type
+import Sidebar, { Agent } from '@/components/dashboard/sidebar'; // Import the Sidebar component and the Agent interface
 import '@/app/globals.css';
 
 export default function Dashboard() {
@@ -20,7 +21,7 @@ export default function Dashboard() {
 
   const userName = session.user?.name || 'User';
 
-  // Add the Agent type to the agent parameter
+  // Correctly type the 'agent' parameter
   const handleAgentSelect = (agent: Agent) => {
     setSystemMessage(agent.systemMessage);
     setSelectedAgentName(agent.name); // Update the selected agent name
@@ -29,7 +30,6 @@ export default function Dashboard() {
   return (
     <Layout>
       <div className="flex">
-        {/* Pass the selectedAgentName to the Sidebar */}
         <Sidebar onAgentSelect={handleAgentSelect} selectedAgentName={selectedAgentName} />
         <main className="main-content flex-1">
           <ChatBox title={`Welcome to Your Dashboard, ${userName}`} systemMessage={systemMessage} initialMessages={[]} />

@@ -1,5 +1,4 @@
 "use client";
-
 import Image from "next/image";
 import Link from "next/link";
 import useScroll from "@/lib/hooks/use-scroll";
@@ -7,23 +6,26 @@ import { useSignInModal } from "./sign-in-modal";
 import UserDropdown from "./user-dropdown";
 import { Session } from "next-auth";
 import { Moon, Sun } from 'lucide-react';
+import { useState, useEffect } from 'react';
 
 export default function NavBar({ session }: { session: Session | null }) {
   const { SignInModal, setShowSignInModal } = useSignInModal();
   const scrolled = useScroll(50);
+  const [darkMode, setDarkMode] = useState(false);
 
-  let darkMode = false;
-  if (typeof window !== "undefined") {
-    darkMode = localStorage.getItem('dark-mode') === 'true';
-    document.body.classList.toggle('dark', darkMode);
-  }
+  useEffect(() => {
+    const savedMode = localStorage.getItem('dark-mode') === 'true';
+    setDarkMode(savedMode);
+    document.body.classList.toggle('dark', savedMode);
+  }, []);
 
   const toggleDarkMode = () => {
     const newMode = !darkMode;
     localStorage.setItem('dark-mode', newMode.toString());
+    setDarkMode(newMode);
     document.body.classList.toggle('dark', newMode);
   };
-
+  
   return (
     <>
       <SignInModal />

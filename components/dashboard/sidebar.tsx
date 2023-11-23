@@ -3,21 +3,14 @@ import styles from './sidebar.module.css'; // Import the CSS module
 import { FaUserSecret, FaRegLightbulb } from 'react-icons/fa';
 
 // Define the shape of the system message object
-interface Agent {
-  name: string;
-  systemMessage: string;
-}
-
-// sidebar.tsx
-
 export interface Agent {
   name: string;
   systemMessage: string;
 }
 
-// ... rest of the sidebar.tsx code
 interface SidebarProps {
   onAgentSelect: (agent: Agent) => void;
+  selectedAgentName: string;
 }
 
 const agents: Agent[] = [
@@ -29,16 +22,18 @@ const agents: Agent[] = [
   // ... Add more agents as needed
 ];
 
-const Sidebar: React.FC<SidebarProps> = ({ onAgentSelect }) => {
+const Sidebar: React.FC<SidebarProps> = ({ onAgentSelect, selectedAgentName }) => {
   return (
     <aside className={styles.sidebar} aria-label="Sidebar">
-      <div className="my-16 py-4 px-3">
+      <div className="py-4 px-3">
         <ul>
           {agents.map((agent, index) => (
             <li key={index}>
               <button
                 onClick={() => onAgentSelect(agent)}
-                className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+                className={`flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 ${
+                  selectedAgentName === agent.name ? styles.sidebarItemSelected : ''
+                }`}
               >
                 {/* Conditional rendering for different icons based on the agent name */}
                 {agent.name === 'Wordle' ? <FaRegLightbulb className="w-6 h-6 icon" /> : <FaUserSecret className="w-6 h-6 icon" />}

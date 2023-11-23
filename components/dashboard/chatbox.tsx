@@ -3,20 +3,23 @@ import Image from 'next/image';
 import { FiSend } from 'react-icons/fi';
 
 
-export default function ChatBox({
-  title = "Describe a study",
-  initialMessages = [],
-}: {
-  title?: string;
-  initialMessages?: string[];
-}) {
+
+export default function ChatBox({ title = "Describe a study", initialMessages = [] }) {
   const [messages, setMessages] = useState<string[]>(initialMessages);
   const messageInputRef = useRef<HTMLDivElement>(null);
 
+  const sanitizeInput = (text) => {
+    // You can extend this function to perform more sophisticated sanitization
+    return text.replace(/<\/?[^>]+(>|$)/g, ""); // Removes HTML tags
+  };
+
   const handleSendMessage = () => {
-    if (messageInputRef.current && messageInputRef.current.innerText.trim() !== "") {
-      setMessages([...messages, messageInputRef.current.innerText]);
-      messageInputRef.current.innerText = ""; // Clear the contenteditable div
+    if (messageInputRef.current) {
+      const sanitizedMessage = sanitizeInput(messageInputRef.current.innerText);
+      if (sanitizedMessage.trim() !== "") {
+        setMessages([...messages, sanitizedMessage]);
+        messageInputRef.current.innerText = ""; // Clear the contenteditable div
+      }
     }
   };
 
@@ -26,6 +29,13 @@ export default function ChatBox({
       handleSendMessage();
     }
   };
+
+  const handlePaste = (e: React.ClipboardEvent) => {
+    e.preventDefault();
+    const text = e.clipboardData.getData('text/plain');
+    document.execCommand('insertText', false, text);
+  };
+
   
   return (
     <div className="relative max-w-2xl mx-auto my-6 overflow-hidden rounded-lg border border-gray-200 bg-white shadow">
@@ -50,12 +60,14 @@ export default function ChatBox({
         <div
           ref={messageInputRef}
           onKeyPress={handleKeyPress}
+          onPaste={handlePaste}
           contentEditable
           className="w-full mt-2 p-2 border border-gray-300 rounded-md shadow-sm focus:ring focus:ring-opacity-50"
           role="textbox"
-          tabIndex={0} // to make div focusable
-          style={{ minHeight: '50px' }} // Set a minimum height
+          tabIndex={0}
+          style={{ minHeight: '50px' }}
         ></div>
+
           <div className="absolute bottom-3 right-4 p-auto">
             <button
               style={{ minHeight: '50px' }} // Set a minimum height

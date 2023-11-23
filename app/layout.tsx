@@ -1,10 +1,11 @@
+
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react";
 import cx from "classnames";
 import { sfPro, inter } from "./fonts";
 import Nav from "@/components/layout/nav"; // This is a client component
 import Footer from "@/components/layout/footer";
-import React from "react";
+import React, { ReactNode } from "react";
 
 export const metadata = {
   title: "Co:valence - Building blocks for your Next.js project",
@@ -13,10 +14,14 @@ export const metadata = {
   themeColor: "#FFF",
 };
 
+type RootLayoutProps = {
+  children: ReactNode;
+};
 
-export default function RootLayout({ children }) {
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en">
+    <>
+      <head>
       <body className={cx(sfPro.variable, inter.variable)}>
         <div className="fixed h-screen w-full bg-gradient-to-br from-indigo-50 via-white to-cyan-100" />
         <Nav /> {/* Nav component will handle the dark mode */}
@@ -26,6 +31,7 @@ export default function RootLayout({ children }) {
         <Footer />
         <Analytics />
       </body>
-    </html>
+      </head>
+      </>
   );
 }

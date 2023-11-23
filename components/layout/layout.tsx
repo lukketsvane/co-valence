@@ -1,14 +1,11 @@
-import "app/globals.css";
-import { Analytics } from "@vercel/analytics/react";
-import Footer from "@/components/layout/footer";
-import { Suspense } from "react";
 import React from 'react';
-import Nav from "@/components/layout/nav";
+import Navbar from './navbar'; // Adjust the path as necessary
+import Footer from './footer'; // Adjust the path as necessary
 
 const Layout = ({ children }) => {
   return (
     <>
-      <Nav />
+      <Navbar />
       <main>{children}</main>
       <Footer />
     </>

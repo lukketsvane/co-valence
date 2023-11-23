@@ -1,5 +1,6 @@
 import React from 'react';
-import { FaUserSecret, FaRegLightbulb } from 'react-icons/fa'; // Assuming FaRegLightbulb is for the "wordle" agent
+import styles from './sidebar.module.css'; // Import the CSS module
+import { FaUserSecret, FaRegLightbulb } from 'react-icons/fa';
 
 const agents = [
   { 
@@ -13,16 +14,16 @@ const agents = [
 
 const Sidebar = ({ onAgentSelect }) => {
   return (
-    <aside className="w-64" aria-label="Sidebar">
-      <div className="overflow-y-auto py-4 px-3 bg-gray-50 rounded dark:bg-gray-800">
-        <ul className="space-y-2">
+    <aside className={styles.sidebar} aria-label="Sidebar">
+      <div className="my-16 py-4 px-3">
+        <ul>
           {agents.map((agent, index) => (
             <li key={index}>
               <button
                 onClick={() => onAgentSelect(agent)}
                 className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
               >
-                {agent.name === 'Wordle' ? <FaRegLightbulb className="w-6 h-6" /> : <FaUserSecret className="w-6 h-6" />}
+                <FaUserSecret className="w-6 h-6 icon" /> {/* Use the icon class for styling */}
                 <span className="ml-3">{agent.name}</span>
               </button>
             </li>

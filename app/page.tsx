@@ -3,7 +3,6 @@ import Card from "@/components/home/card";
 import ComponentGrid from "@/components/home/component-grid";
 import Image from "next/image";
 import { useState, useEffect } from "react";
-import { Moon, Sun } from 'lucide-react';
 
 export default function Home() {
   const [stars, setStars] = useState(0);
@@ -21,7 +20,7 @@ export default function Home() {
       .then((data) => setStars(data.stargazers_count))
       .catch((e) => console.log(e));
   }, []);
-  
+
   return (
     <>
       <div className="z-10 w-full max-w-xl px-5 xl:px-0">
@@ -37,7 +36,6 @@ export default function Home() {
         >
           A modern toolkit for psychological health professionals.
         </p>
-
         <div
           className="mx-auto mt-6 flex animate-fade-up items-center justify-center space-x-5 opacity-0"
           style={{ animationDelay: "0.3s", animationFillMode: "forwards" }}

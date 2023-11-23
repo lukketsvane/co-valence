@@ -51,6 +51,8 @@ co-valence
  ┃ ┣ constants.ts
  ┃ ┣ prisma.ts
  ┃ ┗ utils.ts
+ ┣ pages
+ ┃ ┗dashboard.tsx
  ┣ prisma
  ┃ ┗ schema.prisma
  ┣ public

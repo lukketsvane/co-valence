@@ -1,8 +1,19 @@
+"use client";
+import React, { useEffect, useState } from 'react';
 import Navbar from "./navbar";
-import { getServerSession } from "next-auth/next";
-import { authOptions } from "@/app/api/auth/[...nextauth]/route";
+import { getSession } from "next-auth/react";
 
-export default async function Nav() {
-  const session = await getServerSession(authOptions);
+export default function Nav() {
+  const [session, setSession] = useState(null);
+
+  useEffect(() => {
+    async function fetchSession() {
+      const sessionData = await getSession();
+      setSession(sessionData);
+    }
+
+    fetchSession();
+  }, []);
+
   return <Navbar session={session} />;
 }

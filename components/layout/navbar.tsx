@@ -1,4 +1,6 @@
+
 "use client";
+import React, { useState, useEffect } from 'react';
 import Image from "next/image";
 import Link from "next/link";
 import useScroll from "@/lib/hooks/use-scroll";
@@ -6,7 +8,6 @@ import { useSignInModal } from "./sign-in-modal";
 import UserDropdown from "./user-dropdown";
 import { Session } from "next-auth";
 import { Moon, Sun } from 'lucide-react';
-import { useState, useEffect } from 'react';
 
 export default function NavBar({ session }: { session: Session | null }) {
   const { SignInModal, setShowSignInModal } = useSignInModal();
@@ -22,10 +23,10 @@ export default function NavBar({ session }: { session: Session | null }) {
   const toggleDarkMode = () => {
     const newMode = !darkMode;
     localStorage.setItem('dark-mode', newMode.toString());
-    setDarkMode(newMode);
     document.body.classList.toggle('dark', newMode);
+    setDarkMode(newMode);
   };
-  
+
   return (
     <>
       <SignInModal />
@@ -45,7 +46,7 @@ export default function NavBar({ session }: { session: Session | null }) {
               height="30"
               className="mr-2 rounded-sm"
             ></Image>
-            <p>co:valance</p>
+            <p>co:valence</p>
           </Link>
           <div className="flex items-center">
             <button

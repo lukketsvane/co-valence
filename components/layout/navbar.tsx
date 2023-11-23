@@ -23,7 +23,7 @@ export default function NavBar({ session }: { session: Session | null }) {
       >
         <div className="mx-5 flex h-16 max-w-screen-xl items-center justify-between w-full">
           <Link href="/" className="flex items-center font-bold text-2xl">
-            <p>co:valance</p>
+            <p>co:valence</p>
           </Link>
           <div>
             {session ? (

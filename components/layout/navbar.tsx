@@ -23,7 +23,6 @@ function NavBar() {
   const [darkMode, setDarkMode] = useState(false);
 
   useEffect(() => {
-    // Get the theme from localStorage and apply it
     const savedMode = localStorage.getItem('theme') === 'dark';
     setDarkMode(savedMode);
     document.documentElement.setAttribute('data-theme', savedMode ? 'dark' : 'light');

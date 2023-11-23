@@ -4,19 +4,24 @@
 
 
 :root {
-  /* Light theme colors */
   --background-color: #ffffff;
   --text-color: #000000;
   --link-color: #0000ff;
-  /* other colors */
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    /* Dark theme colors */
     --background-color: #121212;
     --text-color: #ffffff;
     --link-color: #bb86fc;
-    /* other colors */
   }
+}
+
+.card {
+  background-color: var(--background-color);
+  color: var(--text-color);
+}
+
+.dark .card {
+  /* Dark mode specific styles */
 }

@@ -16,25 +16,38 @@
 }
 
 .sidebar li button {
-  display: block;
+  display: flex;
+  align-items: center;
   width: 100%;
   padding: 10px;
   text-align: left;
   border: none;
   background: none;
   outline: none;
-  transition: background-color 0.3s;
+  transition: background-color 0.3s, opacity 0.3s;
+  opacity: 0.7; /* Unselected items are less opaque */
+  color: #333; /* Darker text for unselected items */
 }
+
 
 .sidebar li button:hover {
   background-color: #eaeaea;
+  opacity: 1; /* Full opacity on hover */
 }
 
 .sidebar .icon {
   margin-right: 10px;
 }
 
+
 .sidebarItemSelected {
-  background-color: #blue; /* Replace with the actual color code from your design */
+  background-color: #007bff; /* Bright blue background for selected item */
   color: white;
+  opacity: 1; /* Full opacity for selected item */
+  font-weight: bold; /* Bold font weight for selected item */
+  border-left: 4px solid white; /* White left border for selected item */
+}
+
+.sidebarItemSelected .icon {
+  color: white; /* White icon color for selected item */
 }

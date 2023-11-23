@@ -28,7 +28,7 @@ const agents: Agent[] = [
 const Sidebar: React.FC<SidebarProps> = ({ onAgentSelect, selectedAgentName }) => {
   return (
     <aside className={styles.sidebar} aria-label="Sidebar">
-      <div className="py-4 px-3">
+      <div className="py-14 px-3">
         <ul>
           {agents.map((agent, index) => (
             <li key={index}>

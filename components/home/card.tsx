@@ -1,3 +1,4 @@
+import { m as motion } from 'framer-motion'
 import { ReactNode } from "react";
 import ReactMarkdown from "react-markdown";
 
@@ -13,6 +14,13 @@ export default function Card({
   large?: boolean;
 }) {
   return (
+    <motion.div
+      whileHover={{ scale: 1.05 }}
+      whileTap={{ scale: 0.95 }}
+      className={`relative col-span-1 h-96 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-md ${
+        large ? "md:col-span-2" : ""
+      } dark:border-gray-700 dark:bg-gray-800`}
+    >
     <div
       className={`relative col-span-1 h-96 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-md ${
         large ? "md:col-span-2" : ""
@@ -49,5 +57,8 @@ export default function Card({
         </div>
       </div>
     </div>
+
+    </motion.div>
+
   );
 }

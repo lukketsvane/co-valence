@@ -1,4 +1,3 @@
-"use client";
 import { MetadataRoute } from "next";
 import prisma from "@/lib/prisma";
 
@@ -12,11 +11,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
   return [
     {
-      url: "https://co-valence.dev",
+      url: "https://precedent.dev",
       lastModified: new Date(),
     },
     ...users.map((user) => ({
-      url: `https://co-valence.dev/${user.id}`,
+      url: `https://precedent.dev/${user.id}`,
       lastModified: new Date(),
     })),
   ];

@@ -5,7 +5,7 @@ import ComponentGrid from "@/components/home/component-grid";
 import Image from "next/image";
 import useSWR from 'swr';
 
-const fetcher = url => fetch(url).then(r => r.json());
+const fetcher = (url: RequestInfo | URL) => fetch(url).then(r => r.json());
 
 export default function Home() {
   const { data, error } = useSWR("https://api.github.com/repos/lukketsvane/co-valence", fetcher);
@@ -13,15 +13,18 @@ export default function Home() {
 
   return (
     <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      className="dark:bg-gray-900"
+      initial={{ y: -100, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ delay: 0.2, duration: 1 }}
+      
+      className="dark:bg-gray-100"
     >
-      <div className="z-10 w-full max-w-xl px-5 xl:px-0">
+      <div className="z-100 w-full max-w-xl px-5 xl:px-0">
         <motion.h1
           initial={{ y: -100, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ delay: 0.2, duration: 1 }}
+
           className="bg-gradient-to-br from-green-300 to-blue-500 bg-clip-text text-center font-display text-4xl font-bold md:text-7xl"
         >
           co:valence
@@ -30,6 +33,7 @@ export default function Home() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4, duration: 1 }}
+
           className="mt-6 text-center text-gray-500 md:text-xl dark:text-gray-300"
         >
           A modern toolkit for psychological health professionals.
@@ -62,26 +66,26 @@ const features = [
   {
     title: "Patient Journaling System",
     description: "Maintain patient records with ease using a secure and intuitive journaling system, accessible from anywhere.",
-    demo: <Image src="/journal-demo.png" alt="Journal Demo" width={300} height={200} />, 
+    demo: <Image src="/logo.png" alt="Journal Demo" width={300} height={200} />, 
   },
   {
     title: "Data-Driven Insights",
     description: "Gain valuable insights into patient trends with data analytics tools, helping you make informed decisions.",
-    demo: <Image src="/data-insights-demo.png" alt="Data Insights Demo" width={300} height={200} />,
+    demo: <Image src="/logo.png"  alt="Data Insights Demo" width={300} height={200} />,
   },
   {
     title: "Appointment Scheduling",
     description: "Streamline your appointment booking process with an integrated scheduling tool that syncs with your calendar.",
-    demo: <Image src="/scheduling-demo.png" alt="Scheduling Demo" width={300} height={200} />, 
+    demo: <Image src="/logo.png"  alt="Scheduling Demo" width={300} height={200} />, 
   },
   {
     title: "Resource Library",
     description: "Access a wealth of mental health resources, articles, and research papers to support your practice.",
-    demo: <Image src="/resources-demo.png" alt="Resources Demo" width={300} height={200} />, 
+    demo: <Image src="/logo.png" alt="Resources Demo" width={300} height={200} />, 
   },
   {
     title: "Telehealth Ready",
     description: "Conduct remote consultations with a built-in telehealth feature that offers both video and messaging capabilities.",
-    demo: <Image src="/telehealth-demo.png" alt="Telehealth Demo" width={300} height={200} />, 
+    demo: <Image src="/logo.png" alt="Telehealth Demo" width={300} height={200} />, 
   }
 ];

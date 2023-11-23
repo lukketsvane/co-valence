@@ -1,6 +1,6 @@
 <a href="https://covalence.dev">
-  <img alt="Precedent – Building blocks for your Next project" src="https://co-valence.dev/opengraph-image">
-  <h1 align="center">Precedent</h1>
+  <img alt="Co:valence – Building blocks for your Next project" src="https://co-valence.dev/opengraph-image">
+  <h1 align="center">Co:valence</h1>
 </a>
 
 <p align="center">
@@ -12,7 +12,7 @@
     <img src="https://img.shields.io/twitter/follow/steventey?style=flat&label=steventey&logo=twitter&color=0bf&logoColor=fff" alt="Steven Tey Twitter follower count" />
   </a>
   <a href="https://github.com/steven-tey/co-valence">
-    <img src="https://img.shields.io/github/stars/steven-tey/co-valence?label=steven-tey%2Fco-valence" alt="Precedent repo star count" />
+    <img src="https://img.shields.io/github/stars/steven-tey/co-valence?label=steven-tey%2Fco-valence" alt="Co:valence repo star count" />
   </a>
 </p>
 
@@ -26,13 +26,13 @@
 
 ## Introduction
 
-Precedent is an opinionated collection of components, hooks, and utilities for your Next.js project.
+Co:valence is an opinionated collection of components, hooks, and utilities for your Next.js project.
 
 ## One-click Deploy
 
 You can deploy this template to Vercel with the button below:
 
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fsteven-tey%2Fco-valence&project-name=co-valence&repository-name=co-valence&demo-title=Precedent&demo-description=An%20opinionated%20collection%20of%20components%2C%20hooks%2C%20and%20utilities%20for%20your%20Next%20project.&demo-url=https%3A%2F%2Fco-valence.dev&demo-image=https%3A%2F%2Fco-valence.dev%2Fopengraph-image&env=GOOGLE_CLIENT_ID,GOOGLE_CLIENT_SECRET,NEXTAUTH_SECRET&envDescription=How%20to%20get%20these%20env%20variables%3A&envLink=https%3A%2F%2Fgithub.com%2Fsteven-tey%2Fco-valence%2Fblob%2Fmain%2F.env.example&stores=%5B%7B"type"%3A"postgres"%7D%5D)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fsteven-tey%2Fco-valence&project-name=co-valence&repository-name=co-valence&demo-title=Co:valence&demo-description=An%20opinionated%20collection%20of%20components%2C%20hooks%2C%20and%20utilities%20for%20your%20Next%20project.&demo-url=https%3A%2F%2Fco-valence.dev&demo-image=https%3A%2F%2Fco-valence.dev%2Fopengraph-image&env=GOOGLE_CLIENT_ID,GOOGLE_CLIENT_SECRET,NEXTAUTH_SECRET&envDescription=How%20to%20get%20these%20env%20variables%3A&envLink=https%3A%2F%2Fgithub.com%2Fsteven-tey%2Fco-valence%2Fblob%2Fmain%2F.env.example&stores=%5B%7B"type"%3A"postgres"%7D%5D)
 
 You can also clone & create this repo locally with the following command:
 

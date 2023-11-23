@@ -21,11 +21,6 @@ export default function Card({
         large ? "md:col-span-2" : ""
       } dark:border-gray-700 dark:bg-gray-800`}
     >
-    <div
-      className={`relative col-span-1 h-96 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-md ${
-        large ? "md:col-span-2" : ""
-      }`}
-    >
       <div className="flex h-60 items-center justify-center">{demo}</div>
       <div className="mx-auto max-w-md text-center">
         <h2 className="bg-gradient-to-br from-black to-stone-500 bg-clip-text font-display text-xl font-bold text-transparent [text-wrap:balance] md:text-3xl md:font-normal">
@@ -45,7 +40,6 @@ export default function Card({
               code: ({ node, ...props }) => (
                 <code
                   {...props}
-                  inline="true"
                   className="rounded-sm bg-gray-100 px-1 py-0.5 font-mono font-medium text-gray-800"
                 />
               ),
@@ -55,9 +49,6 @@ export default function Card({
           </ReactMarkdown>
         </div>
       </div>
-    </div>
-
     </motion.div>
-
   );
 }

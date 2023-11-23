@@ -10,3 +10,40 @@ body, html {
 body::-webkit-scrollbar, html::-webkit-scrollbar {
   display: none; 
 }
+
+
+.react-markdown h1 {
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+.react-markdown h2 {
+  font-size: 1.3em;
+  font-weight: bold;
+}
+
+/* Style links */
+.react-markdown a {
+  color: blue;
+  text-decoration: underline;
+}
+
+/* Style blockquotes */
+.react-markdown blockquote {
+  padding-left: 20px;
+  margin: 0;
+  border-left: 3px solid #ccc;
+}
+
+/* Style code blocks */
+.react-markdown code {
+  background-color: #f6f8fa;
+  padding: 3px 5px;
+  border-radius: 3px;
+}
+
+/* Style lists */
+.react-markdown ul,
+.react-markdown ol {
+  padding-left: 20px;
+}

@@ -44,7 +44,6 @@ export default function Modal({
     <Dialog.Root open={showModal} onOpenChange={setShowModal}>
       <Dialog.Portal>
         <Dialog.Overlay
-          // for detecting when there's an active opened modal
           id="modal-backdrop"
           className="animate-fade-in fixed inset-0 z-40 bg-gray-100 bg-opacity-50 backdrop-blur-md"
         />

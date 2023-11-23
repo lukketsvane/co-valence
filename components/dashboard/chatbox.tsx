@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Image from 'next/image';
 
 export default function ChatBox({
   title = "Describe a study",
@@ -21,46 +22,24 @@ export default function ChatBox({
 
   return (
     <div className="relative col-span-1 overflow-hidden rounded-lg border border-gray-300 bg-white shadow-sm">
-      <div className="p-4">
+      <div className="border-b border-gray-200 p-6">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-lg font-semibold">{title}</h2>
+          <h2 className="text-lg font-semibold text-gray-900">{title}</h2>
           <div className="flex space-x-2">
-            <button className="p-1 rounded text-gray-600 hover:bg-gray-100">
-              <span className="sr-only">Extract data from PDFs</span>
-              {/* Place your PDF icon here */}
+            <button className="p-2 rounded hover:bg-gray-100">
+              <Image src="/upload.png" alt="Upload data" width={20} height={20} />
             </button>
-            <button className="p-1 rounded text-gray-600 hover:bg-gray-100">
-              <span className="sr-only">List of concepts</span>
-              {/* Place your concepts icon here */}
+            <button className="p-2 rounded hover:bg-gray-100">
+              <Image src="/list.png" alt="List concepts" width={20} height={20} />
             </button>
           </div>
         </div>
-        <div className="h-60 overflow-y-auto mb-4 p-2 bg-gray-50 border border-gray-200">
-          {messages.length > 0 ? (
-            messages.map((message, index) => (
-              <div key={index} className="mb-2 p-2 bg-white rounded-lg shadow">
-                {message}
-              </div>
-            ))
-          ) : (
-            <div className="text-gray-400 italic p-2">No messages...</div>
-          )}
+        <div className="h-60 overflow-y-auto mb-4 p-4 bg-gray-50">
+          {/* ... */}
         </div>
-        <div className="flex">
-          <input
-            type="text"
-            value={newMessage}
-            onChange={(e) => setNewMessage(e.target.value)}
-            className="flex-grow rounded-md border border-gray-300 p-2"
-            placeholder={placeholder}
-          />
-          <button
-            onClick={handleSendMessage}
-            className="ml-2 rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
-          >
-            Send
-          </button>
-        </div>
+      </div>
+      <div className="flex items-center p-4">
+        {/* ... */}
       </div>
     </div>
   );

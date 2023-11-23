@@ -20,7 +20,7 @@ export default function Dashboard() {
  
   return (
     <Layout>
-        <div className=" justify-center items-start pt-4"> 
+        <div className=" justify-center items-start pt:-14"> 
           <div className=''></div>
             <ChatBox title={`Welcome to Your Dashboard, ${userName}`} initialMessages={[]} />
       </div>

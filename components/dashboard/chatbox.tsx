@@ -91,7 +91,7 @@ export default function ChatBox({ title = "Describe a study", initialMessages = 
         <div className="flex justify-between items-center p-4 bg-gray-50 border-b border-gray-200">
           <div>
             <h2 className="text-lg font-semibold">{title}</h2>
-            <p className="text-sm text-gray-600">Industry: Oil & Gas Industry | Application: Offshore Drilling Operations</p>
+            <p className="text-sm text-gray-600">choose an agent and have fun</p>
           </div>
           {messagePending && (
             <div className="loader">

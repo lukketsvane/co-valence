@@ -8,7 +8,7 @@ export default async function customAssistantHandler(req, res) {
     try {
       const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
       const response = await openai.createChatCompletion({
-        model: "gpt-3.5-turbo", // Adjust model if needed
+        model: "gpt-4-1106-preview", // Adjust model if needed
         messages: [
           { role: "user", content: userMessage }
         ],

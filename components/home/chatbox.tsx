@@ -8,7 +8,6 @@ type Message = {
   content: string;
 };
 
-// Add a new prop for systemMessage
 export default function ChatBox({ title = "Describe a study", initialMessages = [], systemMessage }: { title?: string; initialMessages?: Message[], systemMessage: string }) {
   const [messages, setMessages] = useState<Message[]>(initialMessages);
   const [openaiResponse, setOpenaiResponse] = useState('');
@@ -57,7 +56,7 @@ export default function ChatBox({ title = "Describe a study", initialMessages = 
           const response = await fetch('/api/openai', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ message: userMessage, systemMessage }), // Include systemMessage in the request
+            body: JSON.stringify({ message: userMessage, systemMessage }),
           });
           if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
           const data = await response.json();
@@ -137,7 +136,7 @@ export default function ChatBox({ title = "Describe a study", initialMessages = 
         </div>
       </div>
       {openaiResponse && (
-      <div className="max-w-2xl mx-auto my-6 p-4 overflow-hidden rounded-lg">
+      <div className="max-w-2xl mx-auto my-6 p-4 overflow-hidden rounded-lg" style={{ backgroundColor: 'white', color: 'black' }}> {/* Added style here */}
         <div className="markdown-body">
           <ReactMarkdown>{openaiResponse}</ReactMarkdown>
         </div>

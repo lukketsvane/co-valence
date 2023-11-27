@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useSession } from 'next-auth/react';
 import Layout from '@/components/layout/layout';
-import ChatBox from '@/components/dashboard/chatbox';
+import ChatBox from '@/components/home/chatbox';
 import Sidebar, { Agent } from '@/components/dashboard/sidebar'; // Import the Sidebar component and the Agent interface
 import '@/app/globals.css';
 

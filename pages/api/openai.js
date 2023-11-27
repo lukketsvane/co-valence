@@ -6,7 +6,7 @@ export default async function handler(req, res) {
     try {
       const openai = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
       const completion = await openai.chat.completions.create({
-        model: "gpt-3.5-turbo",
+        model: "gpt-4-1106-preview",
         messages: [
           { role: "system", content: systemMessage }, // Use the system message passed from the client
           { role: "user", content: userMessage }
